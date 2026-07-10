@@ -407,13 +407,20 @@ const ENERGY_LEVELS = ["😴","🙂","💪"];
 
 /* ---------- STORAGE HELPERS ---------- */
 async function saveKey(key, value){
-  try{ await window.storage.set(key, JSON.stringify(value), false); }catch(e){ console.error(e); }
+  try{
+    localStorage.setItem(key, JSON.stringify(value));
+  }catch(e){
+    console.error(e);
+  }
 }
+
 async function loadKey(key){
   try{
-    const r = await window.storage.get(key, false);
-    return r ? JSON.parse(r.value) : null;
-  }catch(e){ return null; }
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  }catch(e){
+    return null;
+  }
 }
 
 let saveTimers = {};
