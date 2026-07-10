@@ -255,8 +255,18 @@
   /* Vacances page */
   .vac-quote{ font-style:italic; color:var(--ink-soft); font-size:15px; margin-bottom:18px; } 
 </style>
+  
 <link rel="manifest" href="manifest.json">
 </head>
+  
+  <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
+</script>
+  
 <body>
 <div class="frame">
 
