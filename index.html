@@ -537,6 +537,7 @@ if("serviceWorker" in navigator){
   const auth = getAuth(app);
 
   const provider = new GoogleAuthProvider();
+  console.log("Bouton trouvé :", document.getElementById("loginBtn"));
 
 document.getElementById("loginBtn").onclick = () => {
   signInWithPopup(auth, provider);
