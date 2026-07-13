@@ -165,6 +165,9 @@
 </style>
 </head>
 <body>
+  <button id="loginBtn">Se connecter avec Google</button>
+<div id="userInfo"></div>
+  
 <div id="app">
   <div class="topbar"><div class="topbar-title" id="topTitle">Mon carnet</div></div>
   <div class="progress-strip"><div class="fill" id="progressFill"></div></div>
@@ -507,7 +510,12 @@ if("serviceWorker" in navigator){
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { 
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   const firebaseConfig = {
  
@@ -527,6 +535,19 @@ if("serviceWorker" in navigator){
 
   const db = getFirestore(app);
   const auth = getAuth(app);
+
+  const provider = new GoogleAuthProvider();
+
+document.getElementById("loginBtn").onclick = () => {
+  signInWithPopup(auth, provider);
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("userInfo").textContent =
+      "Connecté : " + user.email;
+  }
+});
 
   console.log("Firebase connecté");
 </script>
